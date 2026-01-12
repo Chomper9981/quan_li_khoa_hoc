@@ -1,0 +1,75 @@
+.stack {
+  display: flex;
+  flex-direction: column;
+  gap: 12px; /* chỉnh 8 / 12 / 16 tùy taste */
+}
+
+.table_wrapper{
+     display: flex;
+  justify-content: center;
+}
+.crud-table {
+  width: 100%;
+  border-collapse: collapse;
+  background: #fff;
+  border-radius: 10px;
+  overflow: hidden;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+}
+
+/* Header */
+.crud-table thead {
+  background: #2563eb;
+  color: #fff;
+}
+
+.crud-table th,
+.crud-table td {
+  padding: 12px 16px;
+  text-align: left;
+}
+
+/* Body */
+.crud-table tbody tr {
+  border-bottom: 1px solid #eee;
+  transition: background 0.2s ease;
+}
+
+.crud-table tbody tr:hover {
+  background: #f1f5f9;
+}
+
+/* Cột hành động */
+.actions {
+  display: flex;
+  gap: 8px;
+}
+
+/* Button */
+.btn {
+  border: none;
+  padding: 6px 10px;
+  border-radius: 6px;
+  cursor: pointer;
+  font-size: 14px;
+}
+
+.btn.edit {
+  background: #facc15;
+  color: #000;
+}
+
+.btn.delete {
+  background: #ef4444;
+  color: #fff;
+}
+
+.btn.normal {
+  background: #3b82f6;
+  color: #fff;
+}
+
+.btn:hover {
+  opacity: 0.85;
+}
+

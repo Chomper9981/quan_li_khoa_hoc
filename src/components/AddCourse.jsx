@@ -40,11 +40,14 @@ function AddCourse (props) {
                     value={state.timeCount} 
                     onChange={onInputChange} 
                 /> <br/>
-                <input  
-                    type="submit" 
-                    value="Submit"  
-                    /> 
-                <button onClick={() => props.onClose()}>Hủy</button>
+                <button type="submit" className="btn normal">
+                    Thêm
+                    <i className="fa-solid fa-plus"></i>
+                </button>
+                <button className="btn delete"onClick={() => props.onClose()}> 
+                    Hủy
+                    <i className="fa-solid fa-trash"></i>
+                </button>
             </form> 
     );
 } 

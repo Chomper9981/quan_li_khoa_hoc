@@ -3,6 +3,8 @@ import CourseList from "./CourseList";
 import AddCourse from "./AddCourse";
 import {v4 as uuidv4} from 'uuid';
 import {useCountCourse} from "./hooks/CountCourse";
+import { useNavigate } from "react-router-dom";
+
 
 
 const CourseApp = () => {
@@ -46,6 +48,8 @@ const { totalCourses } = useCountCourse(courses);
 
 const [showAddForm, setShowAddForm] = useState(false);
 
+const navigate = useNavigate();
+
 useEffect(() => {
     localStorage.setItem("courses", JSON.stringify(courses));
     console.log(courses);
@@ -54,9 +58,10 @@ useEffect(() => {
   return (
     <div>
         <h3>Tổng số khóa học: {totalCourses}</h3>
-        <button onClick={() => setShowAddForm(true)}>
+        <button className="btn normal" onClick={() => setShowAddForm(true)}>
           Thêm khóa học
-          </button>
+          <i className="fa-solid fa-plus"></i>
+        </button>
 
         {showAddForm && (
         <AddCourse
@@ -67,8 +72,12 @@ useEffect(() => {
         <CourseList courses={courses} 
         deleteCourse = {deleteCourse}
         />
-        <button onClick={() => window.location.href = '/about'}> Về chúng tôi</button>
+        <button className="btn normal" onClick={() => navigate("/about")}>
+          Về chúng tôi
+          <i className="fa-solid fa-plus"></i>
+        </button>
     </div>
+    
   );
 };
 export default CourseApp;
