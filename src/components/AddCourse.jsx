@@ -1,6 +1,5 @@
 import React, { useState } from "react";
 
-
 function AddCourse (props) { 
     const [state, setState] = useState({
         title: "",
@@ -16,6 +15,12 @@ function AddCourse (props) {
  
     const addCourse = e => { 
         e.preventDefault(); 
+        
+        if (!state.title.trim() || !state.timeCount.trim()) {
+            alert("Vui lòng điền đầy đủ thông tin!");
+            return;
+        }
+        
         props.addCourse(state.title, state.timeCount);
         setState({
             title: "",
@@ -24,31 +29,37 @@ function AddCourse (props) {
         props.onClose();
     }; 
 
-     return ( 
-            <form onSubmit={addCourse}> 
-                <input 
-                    type="text" 
-                    name="title"
-                    placeholder="Tên khoa học..." 
-                    value={state.title} 
-                    onChange={onInputChange} 
-                /> <br/>
-                <input 
-                    type="text" 
-                    name="timeCount"
-                    placeholder="Thời gian học..." 
-                    value={state.timeCount} 
-                    onChange={onInputChange} 
-                /> <br/>
+    return ( 
+        <form onSubmit={addCourse}> 
+            <input 
+                type="text" 
+                name="title"
+                placeholder="📝 Tên khóa học..." 
+                value={state.title} 
+                onChange={onInputChange}
+                required
+            />
+            <input 
+                type="number" 
+                name="timeCount"
+                placeholder="⏱️ Thời gian học (tháng)..." 
+                value={state.timeCount} 
+                onChange={onInputChange}
+                min="1"
+                required
+            />
+            <div className="button-group">
                 <button type="submit" className="btn normal">
+                    <i className="fa-solid fa-check"></i>
                     Thêm
-                    <i className="fa-solid fa-plus"></i>
                 </button>
-                <button className="btn delete"onClick={() => props.onClose()}> 
+                <button type="button" className="btn delete" onClick={() => props.onClose()}> 
+                    <i className="fa-solid fa-times"></i>
                     Hủy
-                    <i className="fa-solid fa-trash"></i>
                 </button>
-            </form> 
+            </div>
+        </form> 
     );
 } 
-export default AddCourse; 
+
+export default AddCourse;

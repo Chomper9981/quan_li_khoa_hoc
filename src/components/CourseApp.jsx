@@ -5,79 +5,70 @@ import {v4 as uuidv4} from 'uuid';
 import {useCountCourse} from "./hooks/CountCourse";
 import { useNavigate } from "react-router-dom";
 
-
-
 const CourseApp = () => {
 
   const [courses, setCourses] = useState(() => {
     const saved = localStorage.getItem("courses");
     return saved ? JSON.parse(saved) : [];
-  }
-    // { id: 1, title: "Learn React" },
-    // { id: 2, title: "Learn JS" },
-    // { id: 3, title: "Learn Bootstrap" },
-  ); 
+  }); 
 
-// const addCourse = title => {
-//     const newCourse = {
-//         id: uuidv4(),
-//         title: title
-//     };
-//     setCourses([...courses, newCourse]);
-// }
-
-const addCourse = useCallback((title, timeCount) => {
+  const addCourse = useCallback((title, timeCount) => {
     setCourses(courses => [
       ...courses,
       { id: uuidv4(), title, timeCount }
     ]);
   }, []);
 
-// const deleteCourse = id => {
-//     setCourses(courses => courses.filter(courses => {
-//         return courses.id !== id}));
-// }
-
-const deleteCourse = useCallback((id) => {
+  const deleteCourse = useCallback((id) => {
     setCourses(courses =>
         courses.filter(course => course.id !== id)
     );
   }, []);
 
-const { totalCourses } = useCountCourse(courses);
+  const { totalCourses } = useCountCourse(courses);
 
-const [showAddForm, setShowAddForm] = useState(false);
+  const [showAddForm, setShowAddForm] = useState(false);
 
-const navigate = useNavigate();
+  const navigate = useNavigate();
 
-useEffect(() => {
+  useEffect(() => {
     localStorage.setItem("courses", JSON.stringify(courses));
     console.log(courses);
-}, [courses])
+  }, [courses])
 
   return (
-    <div>
-        <h3>Tổng số khóa học: {totalCourses}</h3>
+    <div className="stack">
+      <h3>📚 Tổng số khóa học: {totalCourses}</h3>
+      
+      <div className="button-group">
         <button className="btn normal" onClick={() => setShowAddForm(true)}>
-          Thêm khóa học
           <i className="fa-solid fa-plus"></i>
+          Thêm khóa học
         </button>
+        
+        <button className="btn normal" onClick={() => navigate("/about")}>
+          <i className="fa-solid fa-info-circle"></i>
+          Về chúng tôi
+        </button>
+      </div>
 
-        {showAddForm && (
+      {showAddForm && (
         <AddCourse
           addCourse={addCourse}
           onClose={() => setShowAddForm(false)}
         />
       )}
-        <CourseList courses={courses} 
-        deleteCourse = {deleteCourse}
-        />
-        <button className="btn normal" onClick={() => navigate("/about")}>
-          Về chúng tôi
-          <i className="fa-solid fa-plus"></i>
-        </button>
+      
+      {courses.length === 0 ? (
+        <div className="empty-state">
+          <i className="fa-solid fa-book-open"></i>
+          <p>Chưa có khóa học nào. Hãy thêm khóa học đầu tiên!</p>
+        </div>
+      ) : (
+        <CourseList courses={courses} deleteCourse={deleteCourse} />
+      )}
     </div>
-    
   );
 };
+
 export default CourseApp;
