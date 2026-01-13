@@ -20,7 +20,7 @@ body {
 
 /* Header Section */
 h3 {
-  color: #292626;
+  color: #fff;
   font-size: 24px;
   margin-bottom: 20px;
   text-align: center;
@@ -194,6 +194,49 @@ form input[type="text"]:focus {
 }
 
 form input[type="text"]::placeholder {
+  color: #94a3b8;
+}
+
+/* Select Dropdown Styles */
+form select.time-select {
+  width: 100%;
+  padding: 12px 16px;
+  margin-bottom: 16px;
+  border: 2px solid #e2e8f0;
+  border-radius: 8px;
+  font-size: 14px;
+  transition: all 0.3s ease;
+  background: #fff;
+  cursor: pointer;
+  appearance: none;
+  background-image: url("data:image/svg+xml;charset=UTF-8,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23667eea' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3e%3cpolyline points='6 9 12 15 18 9'%3e%3c/polyline%3e%3c/svg%3e");
+  background-repeat: no-repeat;
+  background-position: right 12px center;
+  background-size: 20px;
+  padding-right: 40px;
+}
+
+form select.time-select:focus {
+  outline: none;
+  border-color: #667eea;
+  box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.1);
+}
+
+form select.time-select option {
+  padding: 12px;
+  background: #fff;
+  color: #333;
+}
+
+form select.time-select option:first-child {
+  color: #94a3b8;
+}
+
+form select.time-select:hover {
+  border-color: #a5b4fc;
+}
+
+form select.time-select:invalid {
   color: #94a3b8;
 }
 
