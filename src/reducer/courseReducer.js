@@ -1,8 +1,4 @@
 import { 
-  SET_COURSES, 
-  ADD_COURSE, 
-  DELETE_COURSE, 
-  UPDATE_COURSE,
   SET_SELECTED_COURSE 
 } from '../action/types';
 
