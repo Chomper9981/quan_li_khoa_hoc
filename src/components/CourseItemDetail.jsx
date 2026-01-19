@@ -1,5 +1,5 @@
 import React, { useEffect } from "react";
-import { useNavigate, useParams, useLocation } from "react-router-dom";
+import { useNavigate, useLocation } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
 import { setSelectedCourse } from "../action/actions";
 
@@ -11,12 +11,11 @@ function CourseItemDetail() {
   const dispatch = useDispatch();
   
   const navigate = useNavigate();
-  const { id } = useParams();
   const location = useLocation();
 
   useEffect(() => {
     dispatch(setSelectedCourse(location.state.course));
-  }, [id, location.state, dispatch, navigate]);
+  }, []);
 
   return (
     <div className="about-container">
