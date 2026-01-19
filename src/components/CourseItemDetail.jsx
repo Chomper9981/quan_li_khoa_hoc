@@ -15,43 +15,25 @@ function CourseItemDetail() {
   const location = useLocation();
 
   useEffect(() => {
-    // Thử lấy course từ location state (được truyền từ navigate)
     if (location.state?.course) {
       dispatch(setSelectedCourse(location.state.course));
-    } else {
-      // Nếu không có trong location state, lấy từ localStorage
-      const savedCourses = localStorage.getItem("courses");
-      if (savedCourses) {
-        const courses = JSON.parse(savedCourses);
-        const course = courses.find((c) => String(c.id) === id);
-        
-        if (course) {
-          dispatch(setSelectedCourse(course));
-        } else {
-          // Không tìm thấy course, quay về trang chủ
-          alert("Không tìm thấy khóa học!");
-          navigate("/");
-        }
-      } else {
-        navigate("/");
-      }
     }
   }, [id, location.state, dispatch, navigate]);
 
   return (
     <div className="about-container">
-      <h2 className="about-title">📖 Chi tiết khóa học</h2>
+      <h2 className="about-title">Chi tiết khóa học</h2>
 
       <div className="about-content">
         <div className="about-section">
-          <div className="about-label">🎯 Tên khóa học:</div>
+          <div className="about-label">Tên khóa học:</div>
           <div className="about-text">
             {selectedCourse?.title}
           </div>
         </div>
 
         <div className="about-section">
-          <div className="about-label">⚛️ Thời lượng khóa học:</div>
+          <div className="about-label">Thời lượng khóa học:</div>
           <div className="about-text">
             {selectedCourse?.timeCount} tháng
           </div>
