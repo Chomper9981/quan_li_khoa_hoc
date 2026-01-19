@@ -15,7 +15,7 @@ function CourseItemDetail() {
 
   useEffect(() => {
     dispatch(setSelectedCourse(location.state.course));
-  }, []);
+  });
 
   return (
     <div className="about-container">
