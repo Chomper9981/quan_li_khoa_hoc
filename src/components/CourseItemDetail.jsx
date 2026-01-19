@@ -15,9 +15,7 @@ function CourseItemDetail() {
   const location = useLocation();
 
   useEffect(() => {
-    if (location.state?.course) {
-      dispatch(setSelectedCourse(location.state.course));
-    }
+    dispatch(setSelectedCourse(location.state.course));
   }, [id, location.state, dispatch, navigate]);
 
   return (
