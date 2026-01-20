@@ -1,1 +1,2 @@
 export const SET_SELECTED_COURSE = 'SET_SELECTED_COURSE';
+export const SET_COURSES = 'SET_COURSES';

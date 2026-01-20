@@ -35,7 +35,7 @@ const CourseItem = ({ course, deleteCourse, index }) => {
           title="Xóa khóa học"
         >
           <i className="fa-solid fa-trash"></i>
-          Xóa
+          Xóa 
         </button>
         <button
           className="btn normal"

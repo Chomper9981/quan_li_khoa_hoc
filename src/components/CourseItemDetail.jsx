@@ -1,46 +1,41 @@
-import React, { useEffect } from "react";
-import { useNavigate, useLocation } from "react-router-dom";
-import { useSelector, useDispatch } from "react-redux";
-import { setSelectedCourse } from "../action/actions";
+import React from "react";
+import { useNavigate, useParams } from "react-router-dom";
+import { useSelector } from "react-redux";
 
 function CourseItemDetail() {
-  // Lấy state từ Redux store
-  const selectedCourse = useSelector((state) => state.course.selectedCourse);
-  
-  // Lấy dispatch function
-  const dispatch = useDispatch();
-  
+  const { id } = useParams();
   const navigate = useNavigate();
-  const location = useLocation();
+  
+  // Lấy course từ Redux store dựa trên id
+  const selectedCourse = useSelector((state) => 
+    state.course.courses.find(course => course.id === id)
+  );
 
-  useEffect(() => {
-    dispatch(setSelectedCourse(location.state.course));
-  });
+  if (!selectedCourse) {
+    return (
+      <div className="about-container">
+        <p>Không tìm thấy khóa học</p>
+        <button className="btn normal" onClick={() => navigate("/")}>
+          Quay lại
+        </button>
+      </div>
+    );
+  }
 
   return (
     <div className="about-container">
       <h2 className="about-title">Chi tiết khóa học</h2>
-
       <div className="about-content">
         <div className="about-section">
           <div className="about-label">Tên khóa học:</div>
-          <div className="about-text">
-            {selectedCourse?.title}
-          </div>
+          <div className="about-text">{selectedCourse.title}</div>
         </div>
-
         <div className="about-section">
           <div className="about-label">Thời lượng khóa học:</div>
-          <div className="about-text">
-            {selectedCourse?.timeCount} tháng
-          </div>
+          <div className="about-text">{selectedCourse.timeCount} tháng</div>
         </div>
-
         <div className="about-footer">
-          <button
-            className="btn normal btn-large"
-            onClick={() => navigate("/")}
-          >
+          <button className="btn normal btn-large" onClick={() => navigate("/")}>
             <i className="fa-solid fa-home"></i>
             Quay lại trang chủ
           </button>
@@ -51,20 +46,3 @@ function CourseItemDetail() {
 }
 
 export default CourseItemDetail;
-
-// // map state (redux store) to props react
-// const mapStateToProps = (state) => ({
-//   selectedCourse: state.course.selectedCourse,
-// });
-
-// // map dispatch (redux) to props react
-// const mapDispatchToProps = dispatch => {
-//   return {
-//     setSelectedCourse: (course) => dispatch(setSelectedCourse(course)),
-//   };
-// };
-
-// //higher order component
-// export default connect(mapStateToProps, {
-//   setSelectedCourse,
-// })(CourseItemDetail);
