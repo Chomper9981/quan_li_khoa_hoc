@@ -1,10 +1,11 @@
-import { 
+import {
   SET_SELECTED_COURSE,
   SET_COURSES,
-} from '../action/types';
+  DELETE_COURSE,
+} from "../action/types";
 
 const INITIAL_STATE = {
-  courses: JSON.parse(localStorage.getItem('courses')) || [],
+  courses: JSON.parse(localStorage.getItem("courses")) || [],
   selectedCourse: null,
 };
 
@@ -13,14 +14,23 @@ const courseReducer = (state = INITIAL_STATE, action) => {
     case SET_COURSES:
       return {
         ...state,
-        courses: action.payload
+        courses: action.payload,
       };
-      
+
     case SET_SELECTED_COURSE:
       return {
         ...state,
-        selectedCourse: action.payload
+        selectedCourse: action.payload,
       };
+
+    case DELETE_COURSE: {
+      const filtered = state.courses.filter((c) => c.id !== action.payload);
+      localStorage.setItem("courses", JSON.stringify(filtered));
+      return {
+        ...state,
+        courses: filtered,
+      };
+    }
 
     default:
       return state;

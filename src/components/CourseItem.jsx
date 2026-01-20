@@ -12,7 +12,7 @@ const CourseItem = ({ course, deleteCourse, index }) => {
   };
 
   const handleViewDetail = () => {
-    navigate(`/${id}`, { state: { course } });
+    navigate(`/${id}`);
   };
 
   return (

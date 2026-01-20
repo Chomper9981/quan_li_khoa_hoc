@@ -1,14 +1,16 @@
 import React from "react";
 import { useNavigate, useParams } from "react-router-dom";
-import { useSelector } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
+import { deleteCourse } from "../action/actions";
 
 function CourseItemDetail() {
   const { id } = useParams();
   const navigate = useNavigate();
-  
+  const dispatch = useDispatch();
+
   // Lấy course từ Redux store dựa trên id
-  const selectedCourse = useSelector((state) => 
-    state.course.courses.find(course => course.id === id)
+  const selectedCourse = useSelector((state) =>
+    state.course.courses.find((course) => course.id === id),
   );
 
   if (!selectedCourse) {
@@ -21,6 +23,15 @@ function CourseItemDetail() {
       </div>
     );
   }
+
+  const handleDelete = () => {
+    if (
+      window.confirm(`Bạn có chắc muốn xóa khóa học "${selectedCourse.title}"?`)
+    ) {
+      dispatch(deleteCourse(selectedCourse.id));
+      navigate("/");
+    }
+  };
 
   return (
     <div className="about-container">
@@ -35,10 +46,20 @@ function CourseItemDetail() {
           <div className="about-text">{selectedCourse.timeCount} tháng</div>
         </div>
         <div className="about-footer">
-          <button className="btn normal btn-large" onClick={() => navigate("/")}>
-            <i className="fa-solid fa-home"></i>
-            Quay lại trang chủ
-          </button>
+          <div className="button-group">
+            <button
+              className="btn normal btn-large"
+              onClick={() => navigate("/")}
+            >
+              <i className="fa-solid fa-home"></i>
+              Quay lại trang chủ
+            </button>
+
+            <button className="btn delete btn-large" onClick={handleDelete}>
+              <i className="fa-solid fa-trash"></i>
+              Xóa khóa học
+            </button>
+          </div>
         </div>
       </div>
     </div>
